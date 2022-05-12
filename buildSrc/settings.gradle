@@ -1,5 +1,8 @@
 pluginManagement {
 	repositories {
+		maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }    //添加阿里源
+		maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }  //添加阿里源
+		maven { url "https://repo.spring.io/plugins-release" } // 添加Spring源
 		mavenCentral()
 		gradlePluginPortal()
 	}

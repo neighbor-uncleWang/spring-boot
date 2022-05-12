@@ -1,17 +1,20 @@
 plugins {
 	id "java-gradle-plugin"
-	id "io.spring.javaformat" version "${javaFormatVersion}"
+//	id "io.spring.javaformat" version "${javaFormatVersion}"
 	id "checkstyle"
 }
 
 repositories {
+	maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }    //添加阿里源
+	maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }  //添加阿里源
+	maven { url "https://repo.spring.io/plugins-release" } // 添加Spring源
 	mavenCentral()
 	gradlePluginPortal()
 	maven { url "https://repo.spring.io/release" }
 }
 
-sourceCompatibility = 17
-targetCompatibility = 17
+sourceCompatibility = 8
+targetCompatibility = 8
 
 dependencies {
 	checkstyle "io.spring.javaformat:spring-javaformat-checkstyle:${javaFormatVersion}"
