@@ -294,15 +294,20 @@ public class SpringApplication {
 		ConfigurableApplicationContext context = null;
 		configureHeadlessProperty();
 		SpringApplicationRunListeners listeners = getRunListeners(args);
+		//启动监听器
 		listeners.starting(bootstrapContext, this.mainApplicationClass);
 		try {
 			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
+			//environment的初始化
 			ConfigurableEnvironment environment = prepareEnvironment(listeners, bootstrapContext, applicationArguments);
 			configureIgnoreBeanInfo(environment);
 			Banner printedBanner = printBanner(environment);
+			//创建上下文容器
 			context = createApplicationContext();
 			context.setApplicationStartup(this.applicationStartup);
+			//对上下文内容进行填充，也就是准备动作
 			prepareContext(bootstrapContext, context, environment, listeners, applicationArguments, printedBanner);
+			//刷新上下文
 			if (refreshContext(context)) {
 				afterRefresh(context, applicationArguments);
 				Duration timeTakenToStartup = Duration.ofNanos(System.nanoTime() - startTime);
@@ -375,6 +380,7 @@ public class SpringApplication {
 		postProcessApplicationContext(context);
 		addAotGeneratedInitializerIfNecessary(this.initializers);
 		applyInitializers(context);
+		//触发上下文准备动作
 		listeners.contextPrepared(context);
 		bootstrapContext.close(context);
 		if (this.logStartupInfo) {
